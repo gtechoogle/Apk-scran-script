@@ -18,9 +18,7 @@ class AaptWrapper:
                 permission = self.get_used_permission(item);
                 if (permission != None):
                     pkg_permission.append(permission)
-        self.pkg_recorder[pkg_name] = pkg_permission;
-        #print(self.pkg_recorder);
-    
+        self.pkg_recorder[pkg_name] = pkg_permission;    
     def get_pkg_name(self, data):
         pkg_name=data.split(' ')[1];
         return pkg_name;
