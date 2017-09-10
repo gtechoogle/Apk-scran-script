@@ -2,7 +2,7 @@ import os;
 from adbutils import AdbUtils;
 
 class ApkLoader:
-    temp_folder_name = 'apk_temp';
+    temp_folder_name = '../apk_temp';
     apk_path = ['/data/app','/system/app','/system/priv-app','vendor/app','vendor/priv-app']
     def creat_temp_apk_folder(self):
         if (not os.path.exists(self.temp_folder_name)):

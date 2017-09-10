@@ -3,35 +3,22 @@ import xlwt;
 class Reporter:
     def generate_excel(self):
         pass;
-    def write_excel(self):
-        f = xlwt.Workbook() #创建工作簿
-        sheet1 = f.add_sheet(u'sheet1',cell_overwrite_ok=True) #创建sheet  
-        row0 = [u'业务',u'状态',u'北京',u'上海',u'广州',u'深圳',u'状态小计',u'合计']  
-        column0 = [u'机票',u'船票',u'火车票',u'汽车票',u'其它']  
-        status = [u'预订',u'出票',u'退票',u'业务小计']  
-
-        #生成第一行  
-        for i in range(0,len(row0)):  
-            sheet1.write(0,i,row0[i],self.set_style('Times New Roman',220,True))  
-
-        #生成第一列和最后一列(合并4行)  
-        i, j = 1, 0  
-        while i < 4*len(column0) and j < len(column0):  
-            sheet1.write_merge(i,i+3,0,0,column0[j],self.set_style('Arial',220,True)) #第一列  
-            sheet1.write_merge(i,i+3,7,7) #最后一列"合计"  
-            i += 4  
-            j += 1  
-
-        sheet1.write_merge(21,21,0,1,u'合计',self.set_style('Times New Roman',220,True))  
-
-        #生成第二列  
-        i = 0  
-        while i < 4*len(column0):  
-            for j in range(0,len(status)):  
-                sheet1.write(j+i+1,1,status[j])  
-            i += 4  
-
-        f.save('demo1.xls') #保存文件
+    def write_excel(self, data):
+        # style0 = xlwt.easyxf('font: name Times New Roman, color-index red, bold on', num_format_str='#,##0.00')
+        wb = xlwt.Workbook()
+        ws = wb.add_sheet('A Test Sheet')
+        titles = ['Package Name','Mtk Apps','Owner','Connect To Internet','Comments'];
+        row_num = 0;
+        col_num = 0;
+        for title in titles:
+            ws.write(row_num, col_num, title);
+            col_num += 1;
+        row_num = 1;
+        col_num = 0;
+        for pkg_name in data:
+            ws.write(row_num, col_num, pkg_name);
+            row_num += 1;
+        wb.save('../internet_permission_pkg.xls')
 
     def set_style(self,name = 'Times New Roman', height = 16,bold = False):
         style = xlwt.XFStyle() # 初始化样式  

@@ -1,5 +1,7 @@
 import os;
 
+from reporter import *;
+
 class AaptWrapper:
     pkg_recorder={};
     def permission_dump(self, apk_path):
@@ -37,10 +39,18 @@ class AaptWrapper:
 
 def get_files():
     file_list = [];
-    for fpathe,dirs,fs in os.walk('apk_temp'):
+    for fpathe,dirs,fs in os.walk('../apk_temp'):
         for f in fs:
             file_list.append((os.path.join(fpathe,f)))
     return file_list;
+
+def get_mediatek_pkg(data):
+    temp_pkg=[];
+    for pkg in data:
+        if (pkg.find('mtk') != -1 or pkg.find('mediatek') != -1):
+            temp_pkg.append(pkg);
+    return temp_pkg;
+    
 
 if __name__ == '__main__':
     temp_list=get_files();
@@ -52,4 +62,7 @@ if __name__ == '__main__':
     test_app = AaptWrapper();
     for path in apk_file_path:
         test_app.permission_dump(path);
-    print (test_app.get_internet_permission_pkg());
+    pkg = test_app.get_internet_permission_pkg();
+    mediatek_pkg = get_mediatek_pkg(pkg);
+    report = Reporter();
+    report.write_excel(mediatek_pkg);
