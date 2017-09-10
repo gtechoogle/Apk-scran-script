@@ -10,10 +10,10 @@ class AdbUtils:
             if (info.find("\tdevice") != -1):
                 self.device_serio_number.append(info.split("\t")[0])
         # print (device_info);
-        print (self.device_serio_number);
+        # print (self.device_serio_number);
     def is_device_available(self):
         self.get_device_serio_number();
-        if (len(test.device_serio_number) > 0):
+        if (len(self.device_serio_number) > 0):
             return True;
         return False;
 

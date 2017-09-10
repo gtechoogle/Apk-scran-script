@@ -48,7 +48,7 @@ if __name__ == '__main__':
     for file in temp_list:
         if (file.endswith('.apk')):
             apk_file_path.append(file);
-    #print (apk_file_path);    
+    print (apk_file_path);    
     test_app = AaptWrapper();
     for path in apk_file_path:
         test_app.permission_dump(path);

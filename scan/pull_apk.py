@@ -1,4 +1,5 @@
 import os;
+from adbutils import AdbUtils;
 
 class ApkLoader:
     temp_folder_name = 'apk_temp';
@@ -10,9 +11,13 @@ class ApkLoader:
     def pull_apk(self, path):
         os.system('adb pull ' + path + ' ' + self.temp_folder_name);
     def pull_apks(self):
-        self.creat_temp_apk_folder();
-        for path in self.apk_path:
-            self.pull_apk(path)
+        device_checker = AdbUtils();
+        if (device_checker.is_device_available()):
+            self.creat_temp_apk_folder();
+            for path in self.apk_path:
+                self.pull_apk(path)
+        else:
+            print("Please check your device connection");
     
 if __name__ == '__main__':
     test = ApkLoader();
